@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/homepage.css" />
+    <link rel="stylesheet" href="../CSS/shared.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!--Header of the website-->
+      <div class="freeDelivery">
+        <span>Free Home Delivery to All over Pakistan</span>
+      </div>
+
+      <!--Logo Section-->
+      <div class="logos">
+        <div class="hamburger" onclick="openSidebar()">☰</div>
+        <a href="index.html">
+          <img
+            src="../ASSETS/logo.jpeg"
+            alt="logo"
+            height="50px"
+            width="50px"
+          />
+        </a>
+        <ul>
+          <li><i class="fa-solid fa-magnifying-glass"></i></li>
+          <li><i class="fa-regular fa-heart"></i></li>
+          <li>
+            <i
+              class="fa-solid fa-cart-shopping cart-outline"
+              onclick="openCartSidebar()"
+            ></i>
+            <span id="cart-count">0</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Overlay to block interactions -->
+      <div class="overlay" onclick="closeCartSidebar()"></div>
+      <!--Add to Cart SideBar-->
+      <div class="cartSideBar">
+        <span class="close-btn" onclick="closeCartSidebar()">×</span>
+        <h2>SHOPPING CART</h2>
+        <div id="cart-items"></div>
+        <!-- Cart Items Will Be Injected Here -->
+        <div class="cart-footer">
+          <p>Subtotal: <span id="subtotal">Rs.0.00</span></p>
+          <button
+            id="order-now-btn"
+            class="order-now"
+            onclick="openOrderForm()"
+            disabled
+          >
+            ORDER NOW
+          </button>
+        </div>
+      </div>
+
+      <!--Category Section-->
+      <div class="categories">
+        <ul>
+          <li><a href="#" onclick="showData('home')">Home</a></li>
+          <li><a href="#" onclick="showData('Winter')">Winter</a></li>
+          <li><a href="#" onclick="showData('Summer')">Summer</a></li>
+          <li><a href="#" onclick="showData('partyWear')">Party Wear</a></li>
+          <li><a href="#" onclick="showData('Premium')">Premium</a></li>
+          <li><a href="#" onclick="showData('newArrival')">New Arrival</a></li>
+        </ul>
+      </div>
+      <div class="sidebarCategory sidebar-hidden" id="sidebar">
+        <span class="close-btn" onclick="closeSidebar()">×</span>
+        <ul>
+          <li>
+            <a href="#" onclick="showData('home')">Home</a>
+          </li>
+          <li>
+            <a href="#" onclick="showData('Winter')">Winter</a>
+          </li>
+          <li>
+            <a href="#" onclick="showData('Summer')">Summer</a>
+          </li>
+          <li>
+            <a href="#" onclick="showData('partyWear')">Party Wear</a>
+          </li>
+          <li>
+            <a href="#" onclick="showData('Premium'); closeSidebar()"
+              >Premium</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="showData('newArrival'); closeSidebar()"
+              >New Arrival</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!--Poster of the website-->
+      <div class="poster">
+        <img src="../ASSETS/poster.jpeg" alt="" />
+      </div>
+      <!--Products of the website-->
+      <div class="products-container">
+        <h1>Our Products</h1>
+        <div class="products"></div>
+      </div>
+
+      <!--Order Form-->
+      <div class="order-form">
+        <span class="close-btn" onclick="closeOrderForm()">×</span>
+        <h2>Complete Your Order</h2>
+        <div class="form-group">
+          <label>Name *</label>
+          <input type="text" id="name" placeholder="Enter your name" required />
+        </div>
+        <div class="form-group">
+          <label>Phone number 1 *</label>
+          <input
+            type="text"
+            id="phone1"
+            placeholder="Enter primary phone number"
+            required
+            pattern="\d{10,11}"
+          />
+        </div>
+        <div class="form-group">
+          <label>Phone number 2</label>
+          <input
+            type="text"
+            id="phone2"
+            placeholder="Enter secondary phone number (optional)"
+            pattern="\d{10,11}"
+          />
+        </div>
+        <div class="form-group">
+          <label>Full Address *</label>
+          <input
+            type="text"
+            id="address"
+            placeholder="House No, Street, Block, Area"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>City *</label>
+          <input type="text" id="city" placeholder="Enter your city" required />
+        </div>
+        <button class="submit-btn complete-order" onclick="validateOrderForm()">
+          COMPLETE ORDER Rs.0
+        </button>
+      </div>
+
+      <!--View Detail Form-->
+      <div class="popup-overlay" id="popup">
+        <div class="popup-card">
+          <span class="close-btn" onclick="closePopup()">&times;</span>
+          <div class="popup-image">
+            <img src="https://via.placeholder.com/300x400" alt="Suit Image" />
+          </div>
+          <div class="popup-content">
+            <h2>Elegant Black Suit</h2>
+            <p>
+              Perfect for formal occasions with a premium wool blend fabric that
+              offers comfort and style.
+            </p>
+            <p class="price">$299.99</p>
+          </div>
+        </div>
+      </div>
+
+      <!--Footer of the website-->
+      <footer class="footer">
+        <div class="footer-container">
+          <!-- Store Info -->
+          <div class="footer-section">
+            <h3>Our Store</h3>
+            <p><i class="fa-solid fa-phone"></i> 0309-5543972</p>
+            <p>
+              <i class="fa-solid fa-location-dot"></i> Amir Plaza, Tata
+              Market<br />Near Meezan Bank, Fsd
+            </p>
+            <p>
+              <i class="fa-solid fa-envelope"></i> alinaqishah5336@gmail.com
+            </p>
+            <div class="social-icons">
+              <a
+                href="https://www.facebook.com/profile.php?id=61575838403016"
+                target="_blank"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/fyshnghr/?utm_source=qr&r=nametag"
+                target="_blank"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a
+                href="
+              wa.me/+923095543972"
+                target="_blank"
+                ><i class="fa-brands fa-whatsapp"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div class="footer-section">
+            <h3>Categories</h3>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Shop</a></li>
+              <li><a href="#">Summer Collection</a></li>
+            </ul>
+          </div>
+
+          <!-- Legal Links -->
+          <div class="footer-section">
+            <h3>Legal Links</h3>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Delivery Information</a></li>
+              <li><a href="#">Return & Exchange Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script type="module" src="../JS/homepage.js"></script>
+  </body>
+</html>
